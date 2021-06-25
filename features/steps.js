@@ -47,7 +47,7 @@ When("I see that user2 receives the sent message", function() {
         all:
         while (true) {
             for (const msg of browsers[2+i].recivedMsg()) {
-                if (msg.getText() == browsers[i].name + ": " + browsers[i].msg) {
+                if (msg.getText() == browsers[i].name + "ggg: " + browsers[i].msg) {
                     break all;
                 }
             }
