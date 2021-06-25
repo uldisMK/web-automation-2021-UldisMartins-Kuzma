@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "run.multi.test",
+            "type": "pwa-node",
+            "request": "attach",
+            "preLaunchTask": "run.multi.test"
+        }
+    ]   
+}
