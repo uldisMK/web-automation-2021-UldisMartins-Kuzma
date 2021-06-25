@@ -113,8 +113,8 @@ exports.config = {
                 chrome: 'latest',
                 firefox: 'latest'
             }
-        }],
-        'devtools'
+        }]//,
+        //'devtools'
     ],
     
     // Framework you want to run your specs with.
