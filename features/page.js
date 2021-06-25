@@ -29,7 +29,7 @@ class Page {
         return this.browser.$('#usersListCard > [id^="'+name+'"]')
     }
     messageInput() {
-        return this.browser.$('#sendMeffssage')
+        return this.browser.$('#sendMessage')
     }
     recivedMsg() {
         return this.browser.$$('#messages > .text-primary')

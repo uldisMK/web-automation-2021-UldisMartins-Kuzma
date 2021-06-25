@@ -1,4 +1,7 @@
 exports.config = {
+    
+    user: process.env.BROWSERSTACK_USERNAME,
+    key: process.env.BROWSERSTACK_KEY,
     //
     // ====================
     // Runner Configuration
@@ -108,6 +111,16 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: [
+        [
+            'browserstack', {
+                driver: {
+                    chrome: 'latest',
+                    firefox: 'latest'
+                }
+            }
+        ]
+    ],
+    /*services: [
         ['selenium-standalone', {
             driver: {
                 chrome: 'latest',
@@ -115,7 +128,7 @@ exports.config = {
             }
         }]//,
         //'devtools'
-    ],
+    ],*/
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -137,9 +150,24 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
-
-
+    reporters: [
+        //'spec',
+        [
+            'allure',
+            {
+                outputDir: 'allure_results',
+                disableWebdriverStepsReporting: true,
+                disableWebdriverScreenshotsReporting: true,
+            }
+        ],
+        [
+            'junit',
+            {
+                outputDir: './junit_report'
+            }
+        ]
+    ],
+    
     //
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
@@ -171,6 +199,12 @@ exports.config = {
         ignoreUndefinedDefinitions: false
     },
     
+    
+    afterStep: function (step, scenario, result) {
+        if (result.error) {
+            browser.saveScreenshot('./allure_screenshots/' + Date.now() + ".png");
+        }
+    },
     //
     // =====
     // Hooks
