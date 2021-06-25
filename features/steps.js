@@ -94,5 +94,4 @@ Then("I see that both users can disconnect and lose connection", function() {
             }
         }
     }
-    browser.pause(10000)
 })

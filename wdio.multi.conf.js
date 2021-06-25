@@ -44,5 +44,15 @@ exports.config = merge(baseConfig.config, {
                 "moz:firefoxOptions": firefoxOptions
             }
         }
+    },
+    reporters: [['allure', {
+        outputDir: 'allure_results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
+    afterStep: function (step, scenario, result) {
+        if (result.error) {
+            browser.saveScreenshot('./allure_screenshots/' + Date.now() + ".png");
+        }
     }
 })
